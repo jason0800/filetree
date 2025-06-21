@@ -1,22 +1,30 @@
 import React from "react";
-import { Stage, Layer, Rect, Text } from "react-konva";
 
 function App() {
+  const handleDrop = (e) => {
+    e.preventDefault();
+    console.log("Something was dropped!");
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <Stage width={window.innerWidth} height={window.innerHeight}>
-      <Layer>
-        <Text text="Hello Konva" fontSize={24} x={50} y={50} />
-        <Rect
-          x={20}
-          y={80}
-          width={150}
-          height={100}
-          fill="skyblue"
-          draggable
-          shadowBlur={5}
-        />
-      </Layer>
-    </Stage>
+    <div
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      style={{
+        width: "100%",
+        height: "100vh",
+        border: "2px dashed #ccc",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <h2>Drop folder here</h2>
+    </div>
   );
 }
 
