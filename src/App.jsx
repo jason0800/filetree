@@ -7,7 +7,6 @@ function App() {
   const [edges, setEdges] = useState([]);
 
   useEffect(() => {
-    // File tree data WITH sizes
     const data = {
       id: "root",
       name: "Root",
@@ -19,7 +18,16 @@ function App() {
           name: "Folder 1",
           children: [
             { id: "file-1a", name: "file-1a.txt", size: 231 },
-            { id: "file-1b", name: "file-1b.txt", size: 510 }
+            { id: "file-1b", name: "file-1b.txt", size: 510 },
+            {
+              id: "folderBooks",
+              name: "Books",
+              children: [
+                { id: "1499123", name: "millionaire-fastlane.pdf", size: 888 },
+                { id: "414953644", name: "3% man.pdf", size: 123 },
+                { id: "532542", name: "The Silk Roads.pdf", size: 456 }
+              ]
+            }
           ]
         },
         {
@@ -33,12 +41,10 @@ function App() {
       ]
     };
 
-    // D3 tree layout
     const root = d3.hierarchy(data);
     const treeLayout = d3.tree().nodeSize([180, 120]);
     treeLayout(root);
 
-    // Map D3 nodes to React Flow nodes
     const flowNodes = root.descendants().map((d) => {
       const isFile = !d.children;
       const label = isFile
@@ -49,11 +55,9 @@ function App() {
         id: d.data.id,
         data: { label },
         position: { x: d.x, y: d.y },
-        type: "default"
       };
     });
 
-    // Map D3 links to React Flow edges
     const flowEdges = root.links().map((link) => ({
       id: `e${link.source.data.id}-${link.target.data.id}`,
       source: link.source.data.id,
@@ -69,6 +73,7 @@ function App() {
       <ReactFlow
         nodes={nodes}
         edges={edges}
+        nodeTypes
         fitView
         panOnDrag
         zoomOnScroll

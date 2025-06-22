@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -68,4 +68,14 @@
   font-size: 12px;
   color: #777;
   margin: 0;
+} */
+
+.react-flow__node-default {
+  border: 2px solid #4caf50;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+  padding: 8px;
+  font-family: sans-serif;
+  white-space: pre-line;
 }
